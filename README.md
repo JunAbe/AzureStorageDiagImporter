@@ -1,4 +1,4 @@
-AzureStorageDiagImporter のセットアップ手順はコチラ。
+AzureStorageDiagImporter のセットアップ手順については[後述](#セットアップ手順)。
 
 # この Function の目的、用途
 Azure Storage 診断ログを Log Analytics ワークスペースに送信する Azure Function です。
