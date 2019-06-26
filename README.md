@@ -8,7 +8,7 @@ Azure Storage の診断ログはログファイル内はセミコロン区切り
 なので、診断ログファイルを Log Analytics を通して分析できるように、診断ログを自動的に Log Analytics に送信する仕組みを試したかった。
 
 # 概要図、主な動き
-![image.png (46.9 kB)](https://files.esa.io/uploads/production/attachments/10562/2019/04/12/45774/7c805357-812d-4c16-865c-9637338b0240.png)
+![概要図.png](https://github.com/JunAbe/AzureStorageDiagImporter/blob/master/resource/readme_1.png)
 
 ## ① Timer Trigger で毎時で Function を起動する
 ### Timer Trigger にした理由
@@ -34,7 +34,7 @@ hh00 ディレクトリ配下のログファイルが生成しきった状態で
 
 なお、このコンテナは Azure ポータルでは表示されないため、中を確認したい場合は Storage Explorer を使用する。
 - Storage Explorer でのキャプチャ
-![image.png (60.4 kB)](https://files.esa.io/uploads/production/attachments/10562/2019/04/12/45774/3fe73bd0-5213-42df-a6e1-55716ef6050b.png)
+![Storage Explorer.png](https://github.com/JunAbe/AzureStorageDiagImporter/blob/master/resource/readme_2.png)
 
 ## ③ JSON 形式に加工して Log Analytics に送信する
 Log Analytics への送信方法として [HTTP データ コレクター API](https://docs.microsoft.com/ja-jp/azure/azure-monitor/platform/data-collector-api) を使用した。（現時点ではパブリックプレビュー）
@@ -46,7 +46,7 @@ Log Analytics への送信方法として [HTTP データ コレクター API](h
 正常に Log Analytics に送信されると、少し時間がたった後に Custom Logs スキーマに反映される。
 
 - 実際に試してみて作成された Custom Logs
-![image.png (149.8 kB)](https://files.esa.io/uploads/production/attachments/10562/2019/04/12/45774/df16a02e-880b-4418-9327-688f44895b77.png)
+![LogAanalytics_workspace.png](https://github.com/JunAbe/AzureStorageDiagImporter/blob/master/resource/readme_3.png)
 
 これにて Storage 診断ログを Log Analytics で確認出来るようになった。
 実際、これらのログをどのように使えるのか、使う頻度が高そうなクエリは今後検討したいところ。
@@ -60,7 +60,7 @@ Log Analytics への送信方法として [HTTP データ コレクター API](h
 # 余談
 ## 本当は EventGrid を使って Function をトリガーしたかったが、EventGrid では無理だった
 ### 当初考えていた構成図
-![image.png (41.6 kB)](https://files.esa.io/uploads/production/attachments/10562/2019/04/12/45774/8f50bf67-d16a-4af7-9287-55a0b62b36f4.png)
+![EventGridを使った構想図.png](https://github.com/JunAbe/AzureStorageDiagImporter/blob/master/resource/readme_4.png)
 ### EventGrid  で構成出来た場合のメリット
 log ファイルが生成されるたびに Function の処理させることが出来る。
 つまり、***診断ログを即時に LogAnalytics に送信されるため、すぐに分析作業が可能になる。***
@@ -115,6 +115,6 @@ Azure ポータル上から確認するのがラク。（2019/06 時点）
   - ワークスペースID
   - 主キー（セカンダリでも良い）
 
-![image.png (158.2 kB)](https://files.esa.io/uploads/production/attachments/10562/2019/06/27/45774/af2657dd-e21a-4ae4-aff6-d8a5cc84a35d.png)
+![LogAnalyticsワークスペースの詳細情報.png](https://github.com/JunAbe/AzureStorageDiagImporter/blob/master/resource/readme_5.png)
 
 この３つを `local.settings.json` にセットしたら F5 で実行できる状態になります。
