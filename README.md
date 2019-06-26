@@ -85,8 +85,8 @@ Google 翻訳を使って作成した謎文章が伝わるのか不安。。
 # セットアップ手順
 `local.settings.json` に下記を設定する
 - Storage Account の接続文字列（`AzureWebJobsStorage`）
-- Log Analytics ワークスペースID（`LOG_ANALYTICS_CUSTOMER_ID`）
-- Log Analytics ワークスペースのキー（`LOG_ANALYTICS_SHARE_KEY`）
+- Log Analytics ワークスペース CustomerID（`LOG_ANALYTICS_CUSTOMER_ID`）
+- Log Analytics ワークスペース ShareKey（`LOG_ANALYTICS_SHARE_KEY`）
 
 ```json:local.settings.json
 {
@@ -112,8 +112,8 @@ Azure ポータル上から確認するのがラク。（2019/06 時点）
 - Log Analytics ワークスペースを開く
 - 詳細設定を開く
 - Connected Source → Windows Servers にて下記をコピー
-  - ワークスペースID
-  - 主キー（セカンダリでも良い）
+  - ワークスペースCustomerID
+  - プライマリキー（セカンダリでも良い）
 
 ![LogAnalyticsワークスペースの詳細情報.png](https://github.com/JunAbe/AzureStorageDiagImporter/blob/master/resource/readme_5.png)
 
